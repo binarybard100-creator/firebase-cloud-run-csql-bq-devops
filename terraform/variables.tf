@@ -1,4 +1,4 @@
-variable "project_id" {
+variable "projectid" {
   default = "feb-project-486808"
 }
 variable "region" {

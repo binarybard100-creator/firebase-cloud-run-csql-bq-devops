@@ -42,7 +42,7 @@ resource "google_cloud_run_service" "backend" {
   template {
     metadata {
       labels = {
-        environment = var.environment
+        environment = var.env
         owner       = "mandy"
       }
     }
@@ -59,16 +59,18 @@ resource "google_cloud_run_service" "backend" {
   }
 }
 
-resource "google_cloudbuild_trigger" "githubtrigger" {
-  name = "backend-deploy-trigger"
+resource "google_cloudbuild_trigger" "github_trigger" {
+  name = "backend-auto-deploy"
+
   github {
     owner = "binarybard100-creator"
-    name = "firebase-cloud-run-csql-bq-devops"
+    name  = "firebase-cloud-run-csql-bq-devops"
 
     push {
       branch = "^main$"
     }
   }
+
   filename = "cloudbuild.yaml"
 }
 # gcloud beta builds triggers create github \
